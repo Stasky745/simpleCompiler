@@ -1,0 +1,102 @@
+const PI: real := 3.1415;
+
+programa Hello
+
+var radi: real;
+var sol: real;
+var b: boolea;
+var c: car;
+var ini: enter;
+var eReal: real;
+
+escriuln("----- PROVA DE REALS -----");
+eReal:=3E-3;
+
+eReal:=eReal*2.3;
+escriuln("3E-3*2.3 = ",eReal);
+escriuln();
+
+escriuln("----- PROVA D'IGUALTATS -----");
+escriuln("1.0==0.0 ",1.0==0.0);
+escriuln("1.0>=0.0 ",1.0>=0.0);
+escriuln("1.0<=0.0 ",1.0<=0.0);
+escriuln("1.0!=0.0 ",1.0!=0.0);
+escriuln("1.0>0.0 ",1.0>0.0);
+escriuln("1.0<0.0 ",1.0<0.0);
+
+escriuln();
+escriuln("2==0 ",2==0);
+escriuln("2>=0 ",2>=0);
+escriuln("2<=0 ",2<=0);
+escriuln("2!=0 ",2!=0);
+escriuln("2>0 ",2>0);
+escriuln("2<0 ",2<0);
+
+escriuln();
+escriuln("2==2 ",2==2);
+escriuln("2>=2 ",2>=2);
+escriuln("2<=2 ",2<=2);
+escriuln("2!=2 ",2!=2);
+escriuln("2>2 ",2>2);
+escriuln("2<2 ",2<2);
+
+escriuln();
+escriuln("cert==fals ",cert==fals);
+escriuln("cert!=fals ",cert!=fals);
+escriuln("cert==cert ",cert==cert);
+escriuln("cert!=cert ",cert!=cert);
+
+escriuln();
+escriuln("----- CALCUL D'AREA D'UNA ESFERA -----");
+repeteix
+	escriuln("Escriu el radi de l'esfera (0.0 per acabar)");
+	llegeix(radi);
+	si (radi!=0.0) llavors
+		sol:=(4*PI)*radi*radi;
+		escriuln("Àrea de l'esfera = ", sol);
+	fisi
+finsque radi==0.0 escert
+
+escriuln();
+
+repeteix
+	escriuln("2+2=5? (escriu 'C' per CERT, 'F' per FALS)");
+	llegeix(b);
+	si (no(b)) llavors
+		escriuln("Correcte!");
+	altrament
+		escriuln("Malament! Torna-hi!");
+	fisi
+finsque no(b) escert
+
+escriuln();
+escriuln("Comptem!");
+
+per ini de 1 fins 10 fes
+	escriuln(ini);
+fiper
+
+escriuln();
+escriuln("Ara al reves");
+
+per ini de 10 fins 1 pas ~1 fes
+	escriuln(ini);
+fiper
+
+escriuln("Vols acabar? ('S' per SI, 'N' per NO)");
+llegeix(c);
+si c=='S' llavors
+	escriuln("D'acord!");
+altrament
+	si c=='N' llavors
+		escriuln("Mala sort, estic cansat.");
+	altrament
+		escriuln("Em prens el pel?");
+	fisi
+fisi
+
+escriuln();
+escriu("FI!");
+escriuln();
+
+fiprograma

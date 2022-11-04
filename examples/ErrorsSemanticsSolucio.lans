@@ -1,0 +1,175 @@
+/*
+
+EXERCICI:
+
+
+Aquest fitxer LANS es correcte sintacticament, pero esta ple d'errors semantics.
+Troba tots els errors i fes una llista dels tipus d'errors que existeixen en aquest fitxer.
+
+Alguns dels errors que apareixen tambe es podrien considerar errors sintactics.
+Aquests son exemples representatius dels errors semantics que trobem a LANS, pero no es una llista exhaustiva de tots els casos que ens podem trobar.
+Despres de fer l'exercici, igualment es necessari rellegir l'enunciat amb deteniment per
+tenir un llistat complet de tots els errors semantics.
+
+
+EXERCICI 2:
+D'acord amb els tipus d'error semàntic que has identificat, dissenya la taula de simbols
+per guardar tota la informacio necessaria de cada token per poder fer l'analisi semantic.
+
+*/
+
+
+
+const r1 : real := 1.2; 
+const r2 : real := 1; 
+const e1 : enter := 3; 
+const e2 : enter := 3.4; //Error de tipus (sintactic?)
+const CERT : boolea := cert; 
+
+
+
+tipus alias1 : enter; 
+
+tipus vec10 : vector de enter inici 1 fi 10; 
+tipus vec10_2 : vector de enter inici 1 fi 10.5; //Error de tipus (sintactic?)
+
+tipus tup1: tupla
+	r1 : real;
+	e1 : enter;
+	r1 : real; //Camp repetit
+	fitupla;
+
+
+//Moltes de les funcions seguents no estan implementades
+
+funcio r1() retorna real; //Nom ja agafat per la constant r1
+
+funcio func1() retorna enter;
+
+funcio func2() retorna real;
+
+funcio func3() retorna enter; 
+
+funcio func5(e1 : enter, e10 : enter, e100 : enter) retorna enter;
+
+
+funcio f1(n : enter) retorna enter; 
+
+funcio f1(c : car) retorna enter; 
+
+funcio f1(c : car) retorna boolea; //Redefinicio d'una funcio ja definida, encara que el tipus de retorn sigui diferent
+
+
+funcio f2(pe i : enter, pes b: boolea) retorna enter; //Funcions no poden tenir parametres d'entrada/sortida (sintactic?)
+
+
+funcio f3(x : enter, y : real) retorna enter; 
+
+funcio f3(x: enter, y: real) retorna enter;  
+
+
+funcio abc(i : enter) retorna boolea; 
+
+accio abc(i : enter);  //Ja hi ha una funcio amb el nom abc
+
+accio abc(pes b : boolea);
+
+accio a1(pes x : enter);
+
+accio a1(pe x : enter); //Redefinicio d'una funcio ja definida, encara que un tingui parametre entrada i l'altre parametre entrada/sortida
+
+
+
+//============= Programa principal ================
+programa ProgramaTestSemantic
+var e1 : enter; //e1 ja esta definit com a constant
+var e3 : enter;
+var e7 : enter;
+var e3 : car; //e3 ja esta definit
+var alias1 : car; //alias1 ja esta definit com a tipus
+var c1 : car; 
+var b1 : booolea;
+var tupl1 : tup1;
+var tupl2 : tup1;
+var vec : vec10;
+
+
+b1 := 4; //Error de tipus
+r1 := 5; //No es pot assignar una constant
+e5 := 2+2; //Variable e5 no definida
+e3 := 2*abc*abcde; //abc no existeix com a variable (nomes funcio). abcde no existeix
+c1 := 'a'+3; //Operador + no definit entre caracters i enters
+b1 := 4 == true; //Operador == no definit entre enters i booleans
+tup1 := tup2; 
+
+escriu(); //Escriu necessita almenys un parametre (pot ser sintactic)
+escriuln();
+escriu(c1); 
+
+e3:=f3(2,3); //Crida ambigua entre les dues definicions de f3: f3(enter,real) i f3 (real,enter)
+
+e3:=f1(cert); //f1(bool) no esta definit
+
+tup1.a := fals; //camp 'a' no existeix
+e3 := vec[c1]; //error de tipus, no es pot indexar amb caracter
+e3 := vec[10];
+e3 := vec[11]; //OK! El programa peta per ArrayIndexOutOfBounds, pero es un error d'execucio, no de compilacio!
+
+abc(cert); //Error, no es pot passar un valor constant com a pes
+abc(CERT); //Error, no es pot passar una  constant com a pes
+abc(b1);
+abc(b1==cert); //Error, no es pot passar una expressio composta com a pes
+
+repeteix
+	e3 := e3+1;
+	escriu(e3);
+finsque e3 escert //Error de tipus
+
+e3:= 4;
+
+//OK! el programa es penja, pero no es problema del compilador
+repeteix
+	escriu(e3);
+finsque e3 > 10 escert
+
+per i de 1 fins e3 fes //Variable 'i' no definida
+	escriuln(i);
+fiper
+
+per c1 de 1 fins e3 fes //Error de tipus, c1 ha de ser enter
+	escriuln(c1);
+fiper
+
+fiprograma
+
+
+
+//Algunes funcions no estan definides
+
+
+funcio func1() retorna enter 
+	retorna cert; //Error de tipus
+fifuncio
+
+
+funcio func2() retorna enter 
+	retorna 3;
+fifuncio
+
+
+funcio func4() retorna enter
+	retorna e3; //e3 no definit
+fifuncio
+
+//e1 ja esta definit com a constant. No es problema que els parametres tinguin un nom diferent que a la definicio
+funcio func5(e1: enter, e10: enter, e50 : enter) retorna enter 
+
+var e10: enter; //Redefinicio de e10
+
+retorna e10;
+
+fifuncio
+
+accio abc(b : boolea) //b esta definit com a 'pes', per tant ha de ser 'pes' a la implementacio
+escriure(b);
+fiaccio
